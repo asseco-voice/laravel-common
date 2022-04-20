@@ -33,6 +33,11 @@ class CommonServiceProvider extends ServiceProvider
         $this->hotfixSqlite();
     }
 
+    /**
+     * Fix because SQLite throws an error if drop foreign is used in migrations.
+     *
+     * @return void
+     */
     public function hotfixSqlite()
     {
         \Illuminate\Database\Connection::resolverFor('sqlite',
