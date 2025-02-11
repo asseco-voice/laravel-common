@@ -23,7 +23,7 @@ class ContextModel implements Context
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getToken(): ?string
     {
@@ -55,9 +55,9 @@ class ContextModel implements Context
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getXTenantId(): string
+    public function getXTenantId(): ?string
     {
         return $this->xTenantId;
     }
@@ -73,5 +73,10 @@ class ContextModel implements Context
     public static function getCorrelationHeaderName(): string
     {
         return config('asseco-common.correlation.header_name');
+    }
+
+    public static function getTenantHeaderName(): string
+    {
+        return config('asseco-common.tenant.header_name');
     }
 }
