@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "laravel/framework": "^10.0",
         "asseco-voice/laravel-blueprint-audit": "^2.0"
     },
