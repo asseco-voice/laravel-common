@@ -11,5 +11,6 @@ interface Context
     public function getXTenantId(): ?string;
 
     public static function getCorrelationHeaderName(): string;
+
     public static function getTenantHeaderName(): string;
 }
