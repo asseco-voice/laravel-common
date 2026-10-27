@@ -39,11 +39,16 @@ class CommonServiceProvider extends ServiceProvider
 
     /**
      * Fix because SQLite throws an error if drop foreign is used in migrations.
+     * Laravel 11+ drops SQLite foreign keys natively, so the fix only applies before that.
      *
      * @return void
      */
     public function hotfixSqlite()
     {
+        if (version_compare($this->app->version(), '11.0.0', '>=')) {
+            return;
+        }
+
         \Illuminate\Database\Connection::resolverFor('sqlite',
             function ($connection, $database, $prefix, $config) {
                 return new class($connection, $database, $prefix, $config) extends SQLiteConnection
@@ -56,7 +61,7 @@ class CommonServiceProvider extends ServiceProvider
 
                         return new class($this) extends SQLiteBuilder
                         {
-                            protected function createBlueprint($table, Closure $callback = null)
+                            protected function createBlueprint($table, ?Closure $callback = null)
                             {
                                 return new class($table, $callback) extends Blueprint
                                 {
